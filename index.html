@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Financeiro Pessoal</title>
+    <title>Finança Control Pro - Sistema Financeiro Pessoal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -995,28 +995,28 @@
                         <div class="stat-icon">
                             <i class="fas fa-credit-card"></i>
                         </div>
-                        <h3>Dívidas</h3>
+                        <h3>Dívidas Pendentes</h3>
                         <div class="stat-value negative" id="total-debts">R$ 0,00</div>
                     </div>
                     <div class="stat-card stat-income">
                         <div class="stat-icon">
                             <i class="fas fa-money-bill-wave"></i>
                         </div>
-                        <h3>Entradas</h3>
+                        <h3>Entradas Pendentes</h3>
                         <div class="stat-value positive" id="total-incomes">R$ 0,00</div>
                     </div>
                     <div class="stat-card stat-balance">
                         <div class="stat-icon">
                             <i class="fas fa-balance-scale"></i>
                         </div>
-                        <h3>Saldo</h3>
+                        <h3>Saldo Previsto</h3>
                         <div class="stat-value neutral" id="total-balance">R$ 0,00</div>
                     </div>
                     <div class="stat-card stat-due">
                         <div class="stat-icon">
                             <i class="fas fa-calendar-exclamation"></i>
                         </div>
-                        <h3>Próximos</h3>
+                        <h3>Próximos 7 Dias</h3>
                         <div class="stat-value warning" id="next-due">R$ 0,00</div>
                     </div>
                 </div>
@@ -1030,28 +1030,28 @@
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <h3>Dívidas Pagas</h3>
-                        <div class="stat-value" id="paid-debts">0</div>
+                        <div class="stat-value" id="paid-debts">R$ 0,00</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon" style="background: rgba(250, 166, 26, 0.15); color: var(--warning);">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <h3>Pendentes</h3>
-                        <div class="stat-value" id="pending-debts">0</div>
+                        <h3>Entradas Recebidas</h3>
+                        <div class="stat-value" id="received-incomes">R$ 0,00</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon" style="background: rgba(93, 128, 214, 0.15); color: var(--info);">
                             <i class="fas fa-calendar-check"></i>
                         </div>
-                        <h3>Fixos Ativos</h3>
-                        <div class="stat-value" id="active-fixed">0</div>
+                        <h3>Fixos Pendentes</h3>
+                        <div class="stat-value" id="pending-fixed">R$ 0,00</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon" style="background: rgba(67, 181, 129, 0.15); color: var(--success);">
                             <i class="fas fa-user-tie"></i>
                         </div>
-                        <h3>Rendas Ativas</h3>
-                        <div class="stat-value" id="active-incomes">0</div>
+                        <h3>Rendas Totais</h3>
+                        <div class="stat-value" id="total-salaries">R$ 0,00</div>
                     </div>
                 </div>
             </div>
@@ -1097,7 +1097,7 @@
             <div class="filter-actions">
                 <button id="apply-filters" class="btn-success"><i class="fas fa-filter"></i> Aplicar Filtros</button>
                 <button id="reset-filters" class="secondary"><i class="fas fa-redo"></i> Limpar Filtros</button>
-                <button id="toggle-paid" class="btn-purple"><i class="fas fa-eye"></i> Mostrar Pagas</button>
+                <button id="toggle-paid" class="btn-purple"><i class="fas fa-eye-slash"></i> Ocultar Pagas</button>
             </div>
         </div>
 
@@ -1112,11 +1112,8 @@
                     <span class="tab-badge" id="fixed-expenses-count">0</span>
                 </button>
                 <button class="tab" data-tab="salary">
-                    <i class="fas fa-money-check-alt"></i> Salários
+                    <i class="fas fa-money-check-alt"></i> Entradas Fixas
                     <span class="tab-badge" id="salary-count">0</span>
-                </button>
-                <button class="tab" data-tab="reports">
-                    <i class="fas fa-chart-bar"></i> Relatórios
                 </button>
             </div>
 
@@ -1165,9 +1162,6 @@
                     <button id="add-fixed-expense-btn" class="btn-warning">
                         <i class="fas fa-plus-circle"></i> Adicionar Gasto Fixo
                     </button>
-                    <button id="generate-monthly-fixed" class="btn-info">
-                        <i class="fas fa-calendar-plus"></i> Gerar Para Este Mês
-                    </button>
                 </div>
                 <div class="fixed-expenses-list" id="fixed-expenses-list">
                 </div>
@@ -1176,31 +1170,17 @@
             <div class="tab-content" id="salary-tab">
                 <div class="quick-actions">
                     <button id="add-salary-btn" class="btn-success">
-                        <i class="fas fa-plus-circle"></i> Adicionar Salário
-                    </button>
-                    <button id="generate-monthly-salary" class="btn-info">
-                        <i class="fas fa-calendar-plus"></i> Gerar Para Este Mês
+                        <i class="fas fa-plus-circle"></i> Adicionar Entrada Fixa
                     </button>
                 </div>
                 <div class="salary-list" id="salary-list">
-                </div>
-            </div>
-
-            <div class="tab-content" id="reports-tab">
-                <div class="card">
-                    <h2><i class="fas fa-chart-pie"></i> Relatório Financeiro</h2>
-                    <div style="text-align: center; padding: 40px;">
-                        <i class="fas fa-chart-bar" style="font-size: 4rem; color: var(--text-secondary); opacity: 0.3; margin-bottom: 20px;"></i>
-                        <h3 style="color: var(--text-secondary); margin-bottom: 15px;">Relatórios em Desenvolvimento</h3>
-                        <p style="color: var(--text-secondary);">Em breve: Gráficos, análise de gastos e relatórios detalhados</p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
             <p><i class="fas fa-database"></i> Todos os dados são salvos localmente no seu navegador</p>
-            <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.7;"> Sistema Completo de Gestão Financeira</p>
+            <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.7;">Finança Control Pro &copy; 2024 - Sistema Completo de Gestão Financeira</p>
         </div>
     </div>
 
@@ -1265,8 +1245,8 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="account-value"><i class="fas fa-money-bill-wave"></i> Valor (R$)</label>
-                        <input type="number" id="account-value" min="0" step="0.01" placeholder="0,00" required>
+                        <label for="account-total-value"><i class="fas fa-money-bill-wave"></i> Valor Total (R$)</label>
+                        <input type="number" id="account-total-value" min="0" step="0.01" placeholder="0,00" required>
                     </div>
                     <div class="form-group">
                         <label for="account-date"><i class="fas fa-calendar-day"></i> Data de Vencimento</label>
@@ -1286,6 +1266,13 @@
                         <div class="form-group">
                             <label for="installment-current"><i class="fas fa-hashtag"></i> Parcela Atual</label>
                             <input type="number" id="installment-current" min="1" value="1">
+                        </div>
+                    </div>
+                    <div class="form-group" style="background: rgba(93, 128, 214, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--info);">
+                        <label><i class="fas fa-calculator"></i> Cálculo Automático</label>
+                        <div style="margin-top: 10px; font-size: 1.1rem;">
+                            <div>Valor da parcela: <strong id="installment-value-calc">R$ 0,00</strong></div>
+                            <div>Próximas parcelas: <strong id="remaining-installments">0</strong></div>
                         </div>
                     </div>
                 </div>
@@ -1334,6 +1321,10 @@
                     <select id="fixed-expense-category" required>
                     </select>
                 </div>
+                <div class="checkbox-group paid-toggle">
+                    <input type="checkbox" id="fixed-expense-paid">
+                    <label for="fixed-expense-paid"><i class="fas fa-check-circle"></i> Este gasto já está pago?</label>
+                </div>
                 <div class="form-group">
                     <label for="fixed-expense-description"><i class="fas fa-align-left"></i> Descrição (Opcional)</label>
                     <textarea id="fixed-expense-description" rows="3" placeholder="Detalhes sobre este gasto fixo..."></textarea>
@@ -1346,13 +1337,13 @@
     <div class="modal" id="salary-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2><i class="fas fa-money-check-alt"></i> Novo Salário</h2>
+                <h2><i class="fas fa-money-check-alt"></i> Nova Entrada Fixa</h2>
                 <button class="close-btn" id="close-salary-modal">&times;</button>
             </div>
             <form id="salary-form">
                 <div class="form-group">
                     <label for="salary-name"><i class="fas fa-heading"></i> Fonte de Renda</label>
-                    <input type="text" id="salary-name" placeholder="Ex: Salário Empresa X, Freelance" required>
+                    <input type="text" id="salary-name" placeholder="Ex: Salário, Freelance, Empréstimo" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -1360,7 +1351,7 @@
                         <input type="number" id="salary-value" min="0" step="0.01" placeholder="0,00" required>
                     </div>
                     <div class="form-group">
-                        <label for="salary-day"><i class="fas fa-calendar-day"></i> Dia do Pagamento</label>
+                        <label for="salary-day"><i class="fas fa-calendar-day"></i> Dia do Recebimento</label>
                         <input type="number" id="salary-day" min="1" max="31" placeholder="1 a 31" required>
                     </div>
                 </div>
@@ -1370,13 +1361,19 @@
                         <option value="monthly">Mensal</option>
                         <option value="biweekly">Quinzenal</option>
                         <option value="weekly">Semanal</option>
+                        <option value="daily">Diária</option>
+                        <option value="single">Única vez</option>
                     </select>
+                </div>
+                <div class="checkbox-group paid-toggle">
+                    <input type="checkbox" id="salary-received">
+                    <label for="salary-received"><i class="fas fa-check-circle"></i> Esta entrada já foi recebida?</label>
                 </div>
                 <div class="form-group">
                     <label for="salary-description"><i class="fas fa-align-left"></i> Descrição (Opcional)</label>
                     <textarea id="salary-description" rows="3" placeholder="Detalhes sobre esta fonte de renda..."></textarea>
                 </div>
-                <button type="submit" class="btn-success"><i class="fas fa-save"></i> Salvar Salário</button>
+                <button type="submit" class="btn-success"><i class="fas fa-save"></i> Salvar Entrada</button>
             </form>
         </div>
     </div>
@@ -1390,7 +1387,7 @@
             <p class="confirmation-text" id="confirmation-text">Tem certeza que deseja realizar esta ação?</p>
             <div class="confirmation-actions">
                 <button id="confirm-action" class="btn-danger"><i class="fas fa-check"></i> Confirmar</button>
-                <button id="cancel-action" class="secondary"><i class="2024-times"></i> Cancelar</button>
+                <button id="cancel-action" class="secondary"><i class="fas fa-times"></i> Cancelar</button>
             </div>
         </div>
     </div>
@@ -1439,7 +1436,33 @@
             
             const today = new Date();
             document.getElementById('account-date').value = today.toISOString().split('T')[0];
+            
+            setupInstallmentCalculation();
         });
+
+        function setupInstallmentCalculation() {
+            const totalValueInput = document.getElementById('account-total-value');
+            const installmentTotalInput = document.getElementById('installment-total');
+            const installmentCurrentInput = document.getElementById('installment-current');
+            
+            function updateInstallmentCalc() {
+                const totalValue = parseFloat(totalValueInput.value) || 0;
+                const totalInstallments = parseInt(installmentTotalInput.value) || 2;
+                const currentInstallment = parseInt(installmentCurrentInput.value) || 1;
+                
+                const installmentValue = totalValue / totalInstallments;
+                const remainingInstallments = totalInstallments - currentInstallment + 1;
+                
+                document.getElementById('installment-value-calc').textContent = `R$ ${installmentValue.toFixed(2)}`;
+                document.getElementById('remaining-installments').textContent = `${remainingInstallments} parcela(s)`;
+            }
+            
+            totalValueInput.addEventListener('input', updateInstallmentCalc);
+            installmentTotalInput.addEventListener('input', updateInstallmentCalc);
+            installmentCurrentInput.addEventListener('input', updateInstallmentCalc);
+            
+            updateInstallmentCalc();
+        }
 
         function loadData() {
             const savedData = localStorage.getItem('financaControlPro');
@@ -1505,6 +1528,7 @@
             
             document.getElementById('account-is-installment').addEventListener('change', function() {
                 document.getElementById('installment-fields').style.display = this.checked ? 'block' : 'none';
+                setupInstallmentCalculation();
             });
             
             document.getElementById('confirm-action').addEventListener('click', executePendingAction);
@@ -1520,22 +1544,30 @@
         function markAllAsPaid() {
             showConfirmation(
                 () => {
+                    let updated = false;
                     finances.categorias.forEach(categoria => {
                         categoria.subcategorias.forEach(subcategoria => {
                             subcategoria.contas.forEach(conta => {
-                                if (categoria.tipo === 'debt' && !conta.paga) {
+                                if (!conta.paga) {
                                     conta.paga = true;
                                     conta.dataPagamentoRealizada = new Date().toISOString().split('T')[0];
+                                    updated = true;
                                 }
                             });
                         });
                     });
-                    saveData();
-                    renderAll();
-                    updateDashboard();
+                    
+                    if (updated) {
+                        saveData();
+                        renderAll();
+                        updateDashboard();
+                        alert('Todas as contas foram marcadas como pagas/recebidas!');
+                    } else {
+                        alert('Todas as contas já estão marcadas como pagas/recebidas!');
+                    }
                 },
                 'Marcar Todas como Pagas',
-                'Deseja marcar TODAS as dívidas como pagas? Esta ação não pode ser desfeita.',
+                'Deseja marcar TODAS as contas como pagas/recebidas? Esta ação não pode ser desfeita.',
                 'warning'
             );
         }
@@ -1544,7 +1576,7 @@
             appState.filters.showPaid = !appState.filters.showPaid;
             const btn = document.getElementById('toggle-paid');
             btn.innerHTML = appState.filters.showPaid ? 
-                '<i class="2024-eye-slash"></i> Ocultar Pagas' : 
+                '<i class="fas fa-eye-slash"></i> Ocultar Pagas' : 
                 '<i class="fas fa-eye"></i> Mostrar Pagas';
             renderCategories();
         }
@@ -1582,7 +1614,7 @@
                 populateCategoryOptions('account-category');
                 if (data) {
                     document.getElementById('account-description').value = data.descricao;
-                    document.getElementById('account-value').value = data.valor;
+                    document.getElementById('account-total-value').value = data.valorTotal || data.valor;
                     document.getElementById('account-date').value = data.dataPagamento;
                     document.getElementById('account-category').value = data.categoriaId || finances.categorias[0]?.id || '';
                     populateSubcategoryOptions('account-subcategory', data.categoriaId);
@@ -1594,6 +1626,10 @@
                         document.getElementById('installment-fields').style.display = 'block';
                         document.getElementById('installment-total').value = data.parcelamento.total;
                         document.getElementById('installment-current').value = data.parcelamento.atual;
+                        setupInstallmentCalculation();
+                    } else {
+                        document.getElementById('account-is-installment').checked = false;
+                        document.getElementById('installment-fields').style.display = 'none';
                     }
                     
                     appState.editingAccountId = data.id;
@@ -1614,24 +1650,28 @@
                     document.getElementById('fixed-expense-day').value = data.diaVencimento;
                     document.getElementById('fixed-expense-category').value = data.categoriaId || '';
                     document.getElementById('fixed-expense-description').value = data.descricao || '';
+                    document.getElementById('fixed-expense-paid').checked = data.paga || false;
                     appState.editingFixedExpenseId = data.id;
                 } else {
                     document.getElementById('fixed-expense-form').reset();
                     document.getElementById('fixed-expense-day').value = new Date().getDate();
+                    document.getElementById('fixed-expense-paid').checked = false;
                     appState.editingFixedExpenseId = null;
                 }
             } else if (type === 'salary') {
-                title.innerHTML = data ? '<i class="fas fa-edit"></i> Editar Salário' : '<i class="fas fa-money-check-alt"></i> Novo Salário';
+                title.innerHTML = data ? '<i class="fas fa-edit"></i> Editar Entrada' : '<i class="fas fa-money-check-alt"></i> Nova Entrada';
                 if (data) {
                     document.getElementById('salary-name').value = data.nome;
                     document.getElementById('salary-value').value = data.valor;
                     document.getElementById('salary-day').value = data.diaPagamento;
                     document.getElementById('salary-frequency').value = data.frequencia;
                     document.getElementById('salary-description').value = data.descricao || '';
+                    document.getElementById('salary-received').checked = data.recebida || false;
                     appState.editingSalaryId = data.id;
                 } else {
                     document.getElementById('salary-form').reset();
                     document.getElementById('salary-day').value = new Date().getDate();
+                    document.getElementById('salary-received').checked = false;
                     appState.editingSalaryId = null;
                 }
             }
@@ -1778,7 +1818,7 @@
             e.preventDefault();
             
             const descricao = document.getElementById('account-description').value.trim();
-            const valor = parseFloat(document.getElementById('account-value').value);
+            const valorTotal = parseFloat(document.getElementById('account-total-value').value);
             const dataPagamento = document.getElementById('account-date').value;
             const categoriaId = document.getElementById('account-category').value;
             const subcategoriaId = document.getElementById('account-subcategory').value;
@@ -1797,6 +1837,8 @@
             if (!subcategoria) return;
             
             let parcelamento = null;
+            let valorParcela = valorTotal;
+            
             if (isInstallment) {
                 const total = parseInt(document.getElementById('installment-total').value);
                 const atual = parseInt(document.getElementById('installment-current').value);
@@ -1806,10 +1848,12 @@
                     return;
                 }
                 
+                valorParcela = valorTotal / total;
                 parcelamento = {
                     total: total,
                     atual: atual,
-                    valorParcela: valor / total,
+                    valorParcela: valorParcela,
+                    valorTotal: valorTotal,
                     idOriginal: appState.editingAccountId || Date.now()
                 };
                 
@@ -1826,7 +1870,8 @@
                     const novaParcela = {
                         id: appState.editingAccountId && i === atual ? appState.editingAccountId : Date.now() + i,
                         descricao: `${descricao} (${i}/${total})`,
-                        valor: parcelamento.valorParcela,
+                        valor: valorParcela,
+                        valorTotal: valorTotal,
                         dataPagamento: parcelaDate.toISOString().split('T')[0],
                         categoriaId: categoriaId,
                         subcategoryId: subcategoriaId,
@@ -1836,7 +1881,8 @@
                             idOriginal: parcelamento.idOriginal,
                             total: total,
                             atual: i,
-                            valorParcela: parcelamento.valorParcela
+                            valorParcela: valorParcela,
+                            valorTotal: valorTotal
                         }
                     };
                     
@@ -1861,7 +1907,8 @@
                     if (conta) {
                         Object.assign(conta, {
                             descricao: descricao,
-                            valor: valor,
+                            valor: valorTotal,
+                            valorTotal: valorTotal,
                             dataPagamento: dataPagamento,
                             paga: isPaid,
                             dataPagamentoRealizada: isPaid ? new Date().toISOString().split('T')[0] : null
@@ -1872,7 +1919,8 @@
                     const novaConta = {
                         id: Date.now(),
                         descricao: descricao,
-                        valor: valor,
+                        valor: valorTotal,
+                        valorTotal: valorTotal,
                         dataPagamento: dataPagamento,
                         categoriaId: categoriaId,
                         subcategoryId: subcategoriaId,
@@ -1885,6 +1933,7 @@
             
             saveData();
             renderAll();
+            updateDashboard();
             closeModal('account');
         }
 
@@ -1896,6 +1945,7 @@
             const diaVencimento = parseInt(document.getElementById('fixed-expense-day').value);
             const categoriaId = document.getElementById('fixed-expense-category').value;
             const descricao = document.getElementById('fixed-expense-description').value.trim();
+            const isPaid = document.getElementById('fixed-expense-paid').checked;
             
             if (!categoriaId) {
                 alert('Selecione uma categoria!');
@@ -1910,6 +1960,7 @@
                     gasto.diaVencimento = diaVencimento;
                     gasto.categoriaId = categoriaId;
                     gasto.descricao = descricao;
+                    gasto.paga = isPaid;
                 }
             } else {
                 const novoGastoFixo = {
@@ -1919,6 +1970,7 @@
                     diaVencimento: diaVencimento,
                     categoriaId: categoriaId,
                     descricao: descricao,
+                    paga: isPaid,
                     ativo: true
                 };
                 finances.gastosFixos.push(novoGastoFixo);
@@ -1926,6 +1978,7 @@
             
             saveData();
             renderAll();
+            updateDashboard();
             closeModal('fixed-expense');
         }
 
@@ -1937,6 +1990,7 @@
             const diaPagamento = parseInt(document.getElementById('salary-day').value);
             const frequencia = document.getElementById('salary-frequency').value;
             const descricao = document.getElementById('salary-description').value.trim();
+            const isReceived = document.getElementById('salary-received').checked;
             
             if (appState.editingSalaryId) {
                 const salario = finances.salarios.find(s => s.id == appState.editingSalaryId);
@@ -1946,6 +2000,7 @@
                     salario.diaPagamento = diaPagamento;
                     salario.frequencia = frequencia;
                     salario.descricao = descricao;
+                    salario.recebida = isReceived;
                 }
             } else {
                 const novoSalario = {
@@ -1955,6 +2010,7 @@
                     diaPagamento: diaPagamento,
                     frequencia: frequencia,
                     descricao: descricao,
+                    recebida: isReceived,
                     ativo: true
                 };
                 finances.salarios.push(novoSalario);
@@ -1962,6 +2018,7 @@
             
             saveData();
             renderAll();
+            updateDashboard();
             closeModal('salary');
         }
 
@@ -2060,7 +2117,7 @@
                         }
                     });
                     
-                    if (!appState.filters.showPaid) {
+                    if (!appState.filters.showPaid && appState.filters.status !== 'paid') {
                         contasFiltradas = contasFiltradas.filter(conta => !conta.paga);
                     }
                     
@@ -2078,19 +2135,22 @@
                         const contaDate = new Date(conta.dataPagamento);
                         const isOverdue = !conta.paga && contaDate < now;
                         
+                        const valorTotal = conta.valorTotal || conta.valor;
+                        const isInstallment = conta.parcelamento;
+                        
                         contasHtml += `
                             <div class="account-item ${conta.paga ? 'paid' : ''}">
                                 <div class="account-info">
                                     <div class="account-header">
                                         <div class="account-title">${conta.descricao}</div>
                                         <div class="account-badges">
-                                            ${conta.parcelamento ? 
+                                            ${isInstallment ? 
                                                 `<span class="badge badge-installment">
                                                     <i class="fas fa-credit-card"></i> ${conta.parcelamento.atual}/${conta.parcelamento.total}
                                                 </span>` : ''}
                                             ${conta.paga ? 
                                                 `<span class="badge badge-paid">
-                                                    <i class="fas fa-check-circle"></i> Paga
+                                                    <i class="fas fa-check-circle"></i> ${categoria.tipo === 'debt' ? 'Paga' : 'Recebida'}
                                                 </span>` : ''}
                                             ${isOverdue ? 
                                                 `<span class="badge badge-overdue">
@@ -2102,12 +2162,12 @@
                                         <div class="account-detail">
                                             <i class="far fa-calendar-alt"></i>
                                             ${formatDate(conta.dataPagamento)}
-                                            ${conta.paga ? ` (Paga em: ${formatDate(conta.dataPagamentoRealizada)})` : ''}
+                                            ${conta.paga && conta.dataPagamentoRealizada ? ` (${categoria.tipo === 'debt' ? 'Paga' : 'Recebida'} em: ${formatDate(conta.dataPagamentoRealizada)})` : ''}
                                         </div>
-                                        ${conta.parcelamento ? 
+                                        ${isInstallment ? 
                                             `<div class="account-detail">
-                                                <i class="fas fa-credit-card"></i>
-                                                Valor da parcela: R$ ${conta.parcelamento.valorParcela.toFixed(2)}
+                                                <i class="fas fa-calculator"></i>
+                                                Valor total: R$ ${valorTotal.toFixed(2)} | Parcela: R$ ${conta.valor.toFixed(2)}
                                             </div>` : ''}
                                     </div>
                                 </div>
@@ -2117,18 +2177,14 @@
                                 <div class="account-actions">
                                     ${!conta.paga ? `
                                         <button class="action-btn btn-success" onclick="markAsPaid(${conta.categoriaId}, ${conta.subcategoryId}, ${conta.id})">
-                                            <i class="fas fa-check"></i> Marcar como Paga
+                                            <i class="fas fa-check"></i> ${categoria.tipo === 'debt' ? 'Pagar' : 'Receber'}
                                         </button>
                                     ` : `
                                         <button class="action-btn btn-warning" onclick="markAsPending(${conta.categoriaId}, ${conta.subcategoryId}, ${conta.id})">
                                             <i class="fas fa-undo"></i> Desmarcar
                                         </button>
                                     `}
-                                    <button class="action-btn btn-warning" onclick="showConfirmation(
-                                        () => editAccount(${conta.categoriaId}, ${conta.subcategoryId}, ${conta.id}),
-                                        'Editar Conta',
-                                        'Deseja editar a conta \"${conta.descricao}\"?'
-                                    )">
+                                    <button class="action-btn btn-warning" onclick="editAccount(${conta.categoriaId}, ${conta.subcategoryId}, ${conta.id})">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="action-btn btn-danger" onclick="showConfirmation(
@@ -2155,7 +2211,7 @@
                                     Total: R$ ${subcategoriaTotal.toFixed(2)}
                                     ${subcategoriaTotalPago > 0 ? 
                                         `<span style="font-size: 0.9rem; color: var(--success); margin-left: 10px;">
-                                            (Pago: R$ ${subcategoriaTotalPago.toFixed(2)})
+                                            (${categoria.tipo === 'debt' ? 'Pago' : 'Recebido'}: R$ ${subcategoriaTotalPago.toFixed(2)})
                                         </span>` : ''}
                                 </div>
                             </div>
@@ -2166,11 +2222,7 @@
                                 <button class="action-btn secondary" onclick="appState.currentCategoryId = ${categoria.id}; openModal('account', {subcategoryId: ${subcategoria.id}, categoryId: ${categoria.id}})">
                                     <i class="fas fa-plus"></i> Adicionar Conta
                                 </button>
-                                <button class="action-btn btn-warning" onclick="showConfirmation(
-                                    () => editSubcategory(${categoria.id}, ${subcategoria.id}),
-                                    'Editar Subcategoria',
-                                    'Deseja editar a subcategoria \"${subcategoria.nome}\"?'
-                                )">
+                                <button class="action-btn btn-warning" onclick="editSubcategory(${categoria.id}, ${subcategoria.id})">
                                     <i class="fas fa-edit"></i> Editar
                                 </button>
                                 <button class="action-btn btn-danger" onclick="showConfirmation(
@@ -2206,7 +2258,7 @@
                                 Total: R$ ${categoriaTotal.toFixed(2)}
                                 ${categoriaTotalPago > 0 ? 
                                     `<div style="font-size: 1rem; color: var(--success); margin-top: 5px;">
-                                        Pago: R$ ${categoriaTotalPago.toFixed(2)}
+                                        ${categoria.tipo === 'debt' ? 'Pago' : 'Recebido'}: R$ ${categoriaTotalPago.toFixed(2)}
                                     </div>` : ''}
                             </div>
                         </div>
@@ -2214,11 +2266,7 @@
                             <button class="action-btn secondary" onclick="appState.currentCategoryId = ${categoria.id}; openModal('subcategory')">
                                 <i class="fas fa-plus"></i> Adicionar Subcategoria
                             </button>
-                            <button class="action-btn btn-warning" onclick="showConfirmation(
-                                () => editCategory(${categoria.id}),
-                                'Editar Categoria',
-                                'Deseja editar a categoria \"${categoria.nome}\"?'
-                            )">
+                            <button class="action-btn btn-warning" onclick="editCategory(${categoria.id})">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
                             <button class="action-btn btn-danger" onclick="showConfirmation(
@@ -2303,13 +2351,14 @@
                                             '<span style="color: var(--success);">Ativo</span>' : 
                                             '<span style="color: var(--danger);">Inativo</span>'}
                                     </div>
+                                    <div class="account-detail">
+                                        <i class="fas fa-check-circle"></i> Pago: ${gasto.paga ? 
+                                            '<span style="color: var(--success);">Sim</span>' : 
+                                            '<span style="color: var(--warning);">Não</span>'}
+                                    </div>
                                 </div>
                                 <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                                    <button class="action-btn btn-warning" onclick="showConfirmation(
-                                        () => editFixedExpense(${gasto.id}),
-                                        'Editar Gasto Fixo',
-                                        'Deseja editar o gasto fixo \"${gasto.nome}\"?'
-                                    )">
+                                    <button class="action-btn btn-warning" onclick="editFixedExpense(${gasto.id})">
                                         <i class="fas fa-edit"></i> Editar
                                     </button>
                                     <button class="action-btn btn-danger" onclick="showConfirmation(
@@ -2320,7 +2369,10 @@
                                     )">
                                         <i class="fas fa-trash"></i> Excluir
                                     </button>
-                                    <button class="action-btn ${gasto.ativo ? 'btn-danger' : 'btn-success'}" onclick="toggleFixedExpense(${gasto.id})">
+                                    <button class="action-btn ${gasto.paga ? 'btn-warning' : 'btn-success'}" onclick="toggleFixedExpensePaid(${gasto.id})">
+                                        <i class="fas ${gasto.paga ? 'fa-undo' : 'fa-check'}"></i> ${gasto.paga ? 'Marcar como Não Pago' : 'Marcar como Pago'}
+                                    </button>
+                                    <button class="action-btn ${gasto.ativo ? 'btn-danger' : 'btn-success'}" onclick="toggleFixedExpenseActive(${gasto.id})">
                                         <i class="fas fa-power-off"></i> ${gasto.ativo ? 'Desativar' : 'Ativar'}
                                     </button>
                                 </div>
@@ -2340,8 +2392,8 @@
                 container.innerHTML = `
                     <div class="no-data">
                         <i class="fas fa-money-bill-wave"></i>
-                        <h3>Nenhum salário cadastrado</h3>
-                        <p>Adicione suas fontes de renda fixa</p>
+                        <h3>Nenhuma entrada cadastrada</h3>
+                        <p>Adicione suas fontes de renda</p>
                     </div>
                 `;
                 return;
@@ -2353,8 +2405,12 @@
                 const frequenciaText = {
                     'monthly': 'Mensal',
                     'biweekly': 'Quinzenal',
-                    'weekly': 'Semanal'
+                    'weekly': 'Semanal',
+                    'daily': 'Diária',
+                    'single': 'Única vez'
                 }[salario.frequencia] || salario.frequencia;
+                
+                const valorMensal = calcularValorMensal(salario.valor, salario.frequencia);
                 
                 html += `
                     <div class="category-card">
@@ -2372,13 +2428,16 @@
                             </div>
                             <div class="category-total positive">
                                 R$ ${salario.valor.toFixed(2)}
+                                <div style="font-size: 1rem; color: var(--text-secondary); margin-top: 5px;">
+                                    Mensal: R$ ${valorMensal.toFixed(2)}
+                                </div>
                             </div>
                         </div>
                         <div class="subcategories-container">
                             <div class="subcategory-card">
                                 <div class="account-details">
                                     <div class="account-detail">
-                                        <i class="fas fa-calendar-day"></i> Paga todo dia ${salario.diaPagamento}
+                                        <i class="fas fa-calendar-day"></i> Recebe todo dia ${salario.diaPagamento}
                                     </div>
                                     <div class="account-detail">
                                         <i class="fas fa-history"></i> Frequência: ${frequenciaText}
@@ -2389,29 +2448,25 @@
                                         </div>
                                     ` : ''}
                                     <div class="account-detail">
-                                        <i class="fas fa-power-off"></i> Status: ${salario.ativo ? 
-                                            '<span style="color: var(--success);">Ativo</span>' : 
-                                            '<span style="color: var(--danger);">Inativo</span>'}
+                                        <i class="fas fa-check-circle"></i> Status: ${salario.recebida ? 
+                                            '<span style="color: var(--success);">Recebida</span>' : 
+                                            '<span style="color: var(--warning);">Pendente</span>'}
                                     </div>
                                 </div>
                                 <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                                    <button class="action-btn btn-warning" onclick="showConfirmation(
-                                        () => editSalary(${salario.id}),
-                                        'Editar Salário',
-                                        'Deseja editar o salário \"${salario.nome}\"?'
-                                    )">
+                                    <button class="action-btn btn-warning" onclick="editSalary(${salario.id})">
                                         <i class="fas fa-edit"></i> Editar
                                     </button>
                                     <button class="action-btn btn-danger" onclick="showConfirmation(
                                         () => deleteSalary(${salario.id}),
-                                        'Excluir Salário',
-                                        'Tem certeza que deseja excluir o salário \"${salario.nome}\"?',
+                                        'Excluir Entrada',
+                                        'Tem certeza que deseja excluir a entrada \"${salario.nome}\"?',
                                         'danger'
                                     )">
                                         <i class="fas fa-trash"></i> Excluir
                                     </button>
-                                    <button class="action-btn ${salario.ativo ? 'btn-danger' : 'btn-success'}" onclick="toggleSalary(${salario.id})">
-                                        <i class="fas fa-power-off"></i> ${salario.ativo ? 'Desativar' : 'Ativar'}
+                                    <button class="action-btn ${salario.recebida ? 'btn-warning' : 'btn-success'}" onclick="toggleSalaryReceived(${salario.id})">
+                                        <i class="fas ${salario.recebida ? 'fa-undo' : 'fa-check'}"></i> ${salario.recebida ? 'Marcar como Pendente' : 'Marcar como Recebida'}
                                     </button>
                                 </div>
                             </div>
@@ -2423,24 +2478,32 @@
             container.innerHTML = html;
         }
 
+        function calcularValorMensal(valor, frequencia) {
+            switch(frequencia) {
+                case 'monthly': return valor;
+                case 'biweekly': return valor * 2;
+                case 'weekly': return valor * 4;
+                case 'daily': return valor * 30;
+                case 'single': return valor;
+                default: return valor;
+            }
+        }
+
         function updateDashboard() {
             let totalDebts = 0;
             let totalIncomes = 0;
             let paidDebts = 0;
-            let pendingDebts = 0;
+            let receivedIncomes = 0;
+            let pendingFixed = 0;
+            let totalSalaries = 0;
             let nextDueAmount = 0;
-            let activeFixed = 0;
-            let activeIncomes = 0;
             
             finances.categorias.forEach(categoria => {
                 categoria.subcategorias.forEach(subcategoria => {
                     subcategoria.contas.forEach(conta => {
                         if (categoria.tipo === 'debt') {
-                            totalDebts += conta.valor;
-                            if (conta.paga) {
-                                paidDebts += conta.valor;
-                            } else {
-                                pendingDebts += conta.valor;
+                            if (!conta.paga) {
+                                totalDebts += conta.valor;
                                 
                                 const contaDate = new Date(conta.dataPagamento);
                                 const now = new Date();
@@ -2449,44 +2512,49 @@
                                 if (diffDays >= 0 && diffDays <= 7) {
                                     nextDueAmount += conta.valor;
                                 }
+                            } else {
+                                paidDebts += conta.valor;
                             }
                         } else {
-                            totalIncomes += conta.valor;
+                            if (!conta.paga) {
+                                totalIncomes += conta.valor;
+                            } else {
+                                receivedIncomes += conta.valor;
+                            }
                         }
                     });
                 });
             });
             
             finances.gastosFixos.forEach(gasto => {
-                if (gasto.ativo) {
+                if (gasto.ativo && !gasto.paga) {
+                    pendingFixed += gasto.valor;
                     totalDebts += gasto.valor;
-                    activeFixed++;
                 }
             });
             
             finances.salarios.forEach(salario => {
                 if (salario.ativo) {
-                    totalIncomes += salario.valor;
-                    activeIncomes++;
-                    
-                    if (salario.frequencia === 'biweekly') {
-                        totalIncomes *= 2;
-                    } else if (salario.frequencia === 'weekly') {
-                        totalIncomes *= 4;
+                    const valorMensal = calcularValorMensal(salario.valor, salario.frequencia);
+                    totalSalaries += valorMensal;
+                    if (!salario.recebida) {
+                        totalIncomes += valorMensal;
+                    } else {
+                        receivedIncomes += valorMensal;
                     }
                 }
             });
             
-            const totalBalance = totalIncomes - totalDebts;
+            const totalBalance = (totalIncomes + totalSalaries) - (totalDebts + pendingFixed);
             
             document.getElementById('total-debts').textContent = `R$ ${totalDebts.toFixed(2)}`;
             document.getElementById('total-incomes').textContent = `R$ ${totalIncomes.toFixed(2)}`;
             document.getElementById('total-balance').textContent = `R$ ${totalBalance.toFixed(2)}`;
             document.getElementById('next-due').textContent = `R$ ${nextDueAmount.toFixed(2)}`;
             document.getElementById('paid-debts').textContent = `R$ ${paidDebts.toFixed(2)}`;
-            document.getElementById('pending-debts').textContent = `R$ ${pendingDebts.toFixed(2)}`;
-            document.getElementById('active-fixed').textContent = activeFixed;
-            document.getElementById('active-incomes').textContent = activeIncomes;
+            document.getElementById('received-incomes').textContent = `R$ ${receivedIncomes.toFixed(2)}`;
+            document.getElementById('pending-fixed').textContent = `R$ ${pendingFixed.toFixed(2)}`;
+            document.getElementById('total-salaries').textContent = `R$ ${totalSalaries.toFixed(2)}`;
             
             const balanceElement = document.getElementById('total-balance');
             balanceElement.className = `stat-value ${totalBalance >= 0 ? 'positive' : 'negative'}`;
@@ -2559,6 +2627,7 @@
                 conta.dataPagamentoRealizada = new Date().toISOString().split('T')[0];
                 saveData();
                 renderAll();
+                updateDashboard();
             }
         };
 
@@ -2575,6 +2644,37 @@
                 conta.dataPagamentoRealizada = null;
                 saveData();
                 renderAll();
+                updateDashboard();
+            }
+        };
+
+        window.toggleFixedExpensePaid = function(id) {
+            const gasto = finances.gastosFixos.find(g => g.id == id);
+            if (gasto) {
+                gasto.paga = !gasto.paga;
+                saveData();
+                renderAll();
+                updateDashboard();
+            }
+        };
+
+        window.toggleFixedExpenseActive = function(id) {
+            const gasto = finances.gastosFixos.find(g => g.id == id);
+            if (gasto) {
+                gasto.ativo = !gasto.ativo;
+                saveData();
+                renderAll();
+                updateDashboard();
+            }
+        };
+
+        window.toggleSalaryReceived = function(id) {
+            const salario = finances.salarios.find(s => s.id == id);
+            if (salario) {
+                salario.recebida = !salario.recebida;
+                saveData();
+                renderAll();
+                updateDashboard();
             }
         };
 
@@ -2631,6 +2731,7 @@
             saveData();
             renderAll();
             updateFilterOptions();
+            updateDashboard();
         };
 
         window.deleteSubcategory = function(categoriaId, subcategoriaId) {
@@ -2639,6 +2740,7 @@
                 categoria.subcategorias = categoria.subcategorias.filter(sub => sub.id != subcategoriaId);
                 saveData();
                 renderAll();
+                updateDashboard();
             }
         };
 
@@ -2660,36 +2762,21 @@
             
             saveData();
             renderAll();
+            updateDashboard();
         };
 
         window.deleteFixedExpense = function(id) {
             finances.gastosFixos = finances.gastosFixos.filter(g => g.id != id);
             saveData();
             renderAll();
+            updateDashboard();
         };
 
         window.deleteSalary = function(id) {
             finances.salarios = finances.salarios.filter(s => s.id != id);
             saveData();
             renderAll();
-        };
-
-        window.toggleFixedExpense = function(id) {
-            const gasto = finances.gastosFixos.find(g => g.id == id);
-            if (gasto) {
-                gasto.ativo = !gasto.ativo;
-                saveData();
-                renderAll();
-            }
-        };
-
-        window.toggleSalary = function(id) {
-            const salario = finances.salarios.find(s => s.id == id);
-            if (salario) {
-                salario.ativo = !salario.ativo;
-                saveData();
-                renderAll();
-            }
+            updateDashboard();
         };
     </script>
 </body>
